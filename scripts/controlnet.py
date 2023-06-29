@@ -306,8 +306,9 @@ class Script(scripts.Script):
     @staticmethod
     def build_control_model(p, unet, model, lowvram):
         if model is None or model == 'None':
-            raise RuntimeError(f"You have not selected any ControlNet Model.")
-
+           # raise RuntimeError(f"You have not selected any ControlNet Model.")
+#Above commented will lead to program abort when you choose Reference ControlNet for Which the model is not required at all. so i temply use below code to return None to make it go through the model validation process.
+        return None
         model_path = global_state.cn_models.get(model, None)
         if model_path is None:
             model = find_closest_lora_model_name(model)
